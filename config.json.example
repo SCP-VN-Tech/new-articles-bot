@@ -1,0 +1,5 @@
+{
+    "siteName": "scp-vn",
+    "wdLogin": "username:password",
+    "webhookUrl": "discord webhook url"
+}
