@@ -6,7 +6,7 @@ let latestPage = null;
 let wikidotAuth = null;
 
 async function fetchLatestPage() {
-    await request(`http://${config.siteName}.wikidot.com/feed/pages/pagename/most-recently-created/category/_default%2Cadult%2Ctheme%2Ccomponent%2Ccomponent-backend/tags/-admin%2C-b%C3%A0n-l%C3%A0m-vi%E1%BB%87c/rating/%3E%3D-10/order/created_at+desc/limit/30/t/Most+Recently+Created`, {
+    await request(`http://${config.siteName}.wikidot.com/feed/pages/pagename/most-recently-created/category/_default%2Cadult/tags/-admin/rating/%3E%3D-10/order/created_at+desc/limit/30/t/Most+Recently+Created`, {
         headers: {
             'Cache-Control': 'max-age=0',
             'Cookie': wikidotAuth,
