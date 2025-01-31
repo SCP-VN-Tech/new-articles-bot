@@ -48,7 +48,6 @@ async function fetchLatestPage() {
                     ],
                     attachments: []
                 };
-                /*
 
                 try {
                     const response = await request(config.webhookUrl, {
@@ -65,7 +64,6 @@ async function fetchLatestPage() {
                 } catch (error) {
                     console.error('Error sending message to Discord:', error);
                 }
-                    */
             });
         } catch (err) {
             console.error(err);
