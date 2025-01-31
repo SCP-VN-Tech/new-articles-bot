@@ -27,9 +27,9 @@ async function fetchLatestPage() {
             });
             await parser.parseString(await res.body.text()).then(async feed => {
                 let newPage = feed.items[0];
-                if (newPage.link == db.get('latestPage')) return;
+                if (newPage.link == await db.get('latestPage')) return;
 
-                db.set('latestPage', newPage.link);
+                await db.set('latestPage', newPage.link);
 
                 let $ = cheerio.load(newPage.description);
 
@@ -48,7 +48,6 @@ async function fetchLatestPage() {
                     ],
                     attachments: []
                 };
-
                 try {
                     const response = await request(config.webhookUrl, {
                         method: 'POST',
