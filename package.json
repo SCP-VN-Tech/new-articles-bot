@@ -9,8 +9,10 @@
   "description": "",
   "dependencies": {
     "cheerio": "^1.0.0",
+    "quick.db": "^9.1.7",
     "rss-parser": "^3.13.0",
-    "undici": "^6.21.1"
+    "undici": "^6.21.1",
+    "write-file-atomic": "^6.0.0"
   },
   "license": "MIT"
 }

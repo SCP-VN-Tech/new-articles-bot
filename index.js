@@ -2,8 +2,11 @@ const config = require('./config.json');
 const cheerio = require('cheerio');
 const { request } = require('undici');
 
-let latestPage = null;
 let wikidotAuth = null;
+
+const { QuickDB, JSONDriver } = require('quick.db');
+const jsonDriver = new JSONDriver();
+const db = new QuickDB({ driver: jsonDriver });
 
 async function fetchLatestPage() {
     await request(`http://${config.siteName}.wikidot.com/feed/pages/pagename/most-recently-created/category/_default%2Cadult/tags/-admin/rating/%3E%3D-10/order/created_at+desc/limit/30/t/Most+Recently+Created`, {
@@ -24,9 +27,9 @@ async function fetchLatestPage() {
             });
             await parser.parseString(await res.body.text()).then(async feed => {
                 let newPage = feed.items[0];
-                if (newPage.link == latestPage) return;
+                if (newPage.link == db.get('latestPage')) return;
 
-                latestPage = newPage.link;
+                db.set('latestPage', newPage.link);
 
                 let $ = cheerio.load(newPage.description);
 
@@ -45,6 +48,7 @@ async function fetchLatestPage() {
                     ],
                     attachments: []
                 };
+                /*
 
                 try {
                     const response = await request(config.webhookUrl, {
@@ -61,6 +65,7 @@ async function fetchLatestPage() {
                 } catch (error) {
                     console.error('Error sending message to Discord:', error);
                 }
+                    */
             });
         } catch (err) {
             console.error(err);
